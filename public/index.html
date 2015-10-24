@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>Fitness</title>
     <link rel="stylesheet" href="/app.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maxiumum-scale=1" />
 </head>
 <body>
-    <div class="demo-layout-waterfall mdl-layout mdl-js-layout">
-        <header class="mdl-layout__header mdl-layout__header--waterfall">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header mdl-layout__header--scroll">
             <!-- Top row, always visible -->
             <div class="mdl-layout__header-row">
                 <!-- Title -->
@@ -28,14 +29,28 @@
         </header>
         <div class="mdl-layout__drawer">
             <span class="mdl-layout-title">Fitness</span>
-            <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="">Overview</a>
-                <a class="mdl-navigation__link" href="">Exercises</a>
-                <a class="mdl-navigation__link" href="">Schedule</a>
+            <nav id="navigation" class="mdl-navigation">
             </nav>
         </div>
         <main class="mdl-layout__content">
-            <div class="page-content"><!-- Your content goes here --></div>
+            <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--12-col">
+                    <div id="overview">
+                        <div class="full-card mdl-card mdl-shadow--2dp">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">Overview</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="schedule">
+                        <div class="full-card mdl-card mdl-shadow--2dp">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">Schedule</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
     <script src="/app.js"></script>

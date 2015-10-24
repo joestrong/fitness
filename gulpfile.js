@@ -27,3 +27,8 @@ gulp.task("sasslibs", function() {
 });
 
 gulp.task("default", ['scripts', 'styles']);
+
+gulp.task("watch", ['default'], function() {
+    gulp.watch('./assets/js/**/*', ['scripts']);
+    gulp.watch('./assets/sass/**/*', ['styles']);
+});
