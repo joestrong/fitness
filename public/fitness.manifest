@@ -1,0 +1,13 @@
+CACHE MANIFEST
+# V0.0.0
+
+index.html
+/app.js
+/app.css
+/fonts/MaterialIcons-Regular.eot
+/fonts/MaterialIcons-Regular.woff2
+/fonts/MaterialIcons-Regular.woff
+/fonts/MaterialIcons-Regular.ttf
+
+NETWORK:
+*

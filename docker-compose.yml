@@ -1,0 +1,7 @@
+fitness:
+  container_name: fitness
+  build: ./docker/fitness
+  ports:
+   - "8084:80"
+  volumes:
+   - ../:/web
