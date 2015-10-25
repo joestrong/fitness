@@ -10047,3 +10047,6 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
 
 .full-card {
   width: auto; }
+
+.exercise-table {
+  width: 100%; }
