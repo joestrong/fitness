@@ -21,7 +21,7 @@ gulp.task("styles", ['sasslibs'], function() {
 });
 
 gulp.task("sasslibs", function() {
-    gulp.src('./node_modules/material-design-lite/material.css')
+    gulp.src('./node_modules/material-design-lite/dist/material.css')
         .pipe(rename('_material.scss'))
         .pipe(gulp.dest('./assets/sass/'));
 });

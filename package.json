@@ -9,7 +9,7 @@
   "author": "Joe Strong <joestrong@gmail.com> (https://www.joestrong.co.uk/)",
   "license": "MIT",
   "dependencies": {
-    "material-design-lite": "^1.0.5"
+    "material-design-lite": "git+https://github.com/google/material-design-lite.git#997bb8e92ff7a7b1a9ee23985a80dbeafdaa13a3"
   },
   "devDependencies": {
     "babelify": "^6.4.0",

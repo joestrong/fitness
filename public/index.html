@@ -51,7 +51,7 @@
                             <tbody id="exerciseList">
                             </tbody>
                         </table>
-                        <button id="addExerciseButton" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                        <button id="add-exercise-button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                             <i class="material-icons">add</i>
                         </button>
                     </div>
@@ -65,6 +65,21 @@
                 </div>
             </div>
         </main>
+    </div>
+    <div id="add-exercise-dialog" class="mdl-dialog mdl-js-dialog">
+        <div class="mdl-dialog__title">
+            <h4>New exercise</h4>
+        </div>
+        <div class="mdl-dialog__content">
+            <label for="add-exercise-name">Name</label>
+            <input type="text" id="add-exercise-name" />
+            <label for="add-exercise-reps">Reps</label>
+            <input type="text" id="add-exercise-reps" />
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button">Add</button>
+            <button type="button" class="mdl-button">Cancel</button>
+        </div>
     </div>
     <script src="/app.js"></script>
 </body>
