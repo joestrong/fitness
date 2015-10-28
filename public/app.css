@@ -8547,8 +8547,8 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
   content: "Loading..."; }
 
 .mdl-spinner.is-upgraded.is-active {
-  -webkit-animation: mdl-spinner__container-rotate 1568.23529ms linear infinite;
-  animation: mdl-spinner__container-rotate 1568.23529ms linear infinite; }
+  -webkit-animation: mdl-spinner__container-rotate 1568.23529412ms linear infinite;
+  animation: mdl-spinner__container-rotate 1568.23529412ms linear infinite; }
 
 @-webkit-keyframes mdl-spinner__container-rotate {
   to {
