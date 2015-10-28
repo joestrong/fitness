@@ -8,6 +8,11 @@ export default class ExercisesController extends ViewController {
         super(document.querySelector('#exercises'));
 
         this.listEl = this.container.querySelector('.exercise-table tbody');
+        this.listEl.addEventListener('click', (event) => {
+            if (event.target.classList.contains('deleteExercise')) {
+                this.deleteExercise(event.target);
+            }
+        });
         this.populateExerciseList();
 
         this.dialog = document.querySelector('#add-exercise-dialog');
@@ -46,8 +51,8 @@ export default class ExercisesController extends ViewController {
         var reps = this.addExerciseReps.value;
         this.addExerciseName.value = "";
         this.addExerciseReps.value = "";
-        Exercise.add(name, reps);
-        this.addExerciseToDom(name, reps);
+        var exercise = Exercise.add(name, reps);
+        this.addExerciseToDom(exercise);
         this.closeAddExerciseDialog();
     }
 
@@ -56,19 +61,27 @@ export default class ExercisesController extends ViewController {
      * @param name
      * @param reps
      */
-    addExerciseToDom(name, reps)
+    addExerciseToDom(exercise)
     {
         var row = document.createElement("tr");
+        row.setAttribute('data-id', exercise.id);
 
         var nameCol = document.createElement("td");
-        nameCol.textContent = name;
+        nameCol.textContent = exercise.name;
         nameCol.className = "mdl-data-table__cell--non-numeric";
 
         var repsCol = document.createElement("td");
-        repsCol.textContent = reps;
+        repsCol.textContent = exercise.reps;
+
+        var deleteCol = document.createElement("td");
+        var deleteIcon = document.createElement("i");
+        deleteIcon.className = "deleteExercise material-icons";
+        deleteIcon.textContent = "delete";
+        deleteCol.appendChild(deleteIcon);
 
         row.appendChild(nameCol);
         row.appendChild(repsCol);
+        row.appendChild(deleteCol);
         this.listEl.appendChild(row);
     }
 
@@ -79,7 +92,18 @@ export default class ExercisesController extends ViewController {
     {
         var exercises = Exercise.get();
         for(let exercise of exercises) {
-            this.addExerciseToDom(exercise.name, exercise.reps);
+            this.addExerciseToDom(exercise);
         }
+    }
+
+    /**
+     * Delete exercise
+     */
+    deleteExercise(element)
+    {
+        var rowToRemove = element.parentNode.parentNode;
+        this.listEl.removeChild(rowToRemove);
+        var idToRemove = rowToRemove.getAttribute('data-id');
+        Exercise.delete(idToRemove);
     }
 }
