@@ -18,6 +18,7 @@ export default class ExercisesController extends ViewController {
         this.dialog = document.querySelector('#add-exercise-dialog');
         this.addExerciseName = this.dialog.querySelector('#add-exercise-name');
         this.addExerciseReps = this.dialog.querySelector('#add-exercise-reps');
+        this.addExerciseRest = this.dialog.querySelector('#add-exercise-rest');
         this.dialogButtons = this.dialog.querySelector('.mdl-dialog__actions').querySelectorAll('.mdl-button');
         this.dialogButtons[0].addEventListener('click', () => this.addExercise());
         this.dialogButtons[1].addEventListener('click', () => this.closeAddExerciseDialog());
@@ -49,9 +50,11 @@ export default class ExercisesController extends ViewController {
     {
         var name = this.addExerciseName.value;
         var reps = this.addExerciseReps.value;
+        var rest = this.addExerciseRest.value;
         this.addExerciseName.value = "";
-        this.addExerciseReps.value = "";
-        var exercise = Exercise.add(name, reps);
+        this.addExerciseReps.value = "3";
+        this.addExerciseRest.value = "2";
+        var exercise = Exercise.add(name, reps, rest);
         this.addExerciseToDom(exercise);
         this.closeAddExerciseDialog();
     }
@@ -73,6 +76,9 @@ export default class ExercisesController extends ViewController {
         var repsCol = document.createElement("td");
         repsCol.textContent = exercise.reps;
 
+        var restCol = document.createElement("td");
+        restCol.textContent = exercise.rest;
+
         var deleteCol = document.createElement("td");
         var deleteIcon = document.createElement("i");
         deleteIcon.className = "deleteExercise material-icons";
@@ -81,6 +87,7 @@ export default class ExercisesController extends ViewController {
 
         row.appendChild(nameCol);
         row.appendChild(repsCol);
+        row.appendChild(restCol);
         row.appendChild(deleteCol);
         this.listEl.appendChild(row);
     }

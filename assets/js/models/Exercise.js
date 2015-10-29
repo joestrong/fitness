@@ -5,13 +5,14 @@ export default class Exercise {
      * @param name
      * @param reps
      */
-    static add(name, reps)
+    static add(name, reps, rest)
     {
         var exercises = this.get();
         var exercise = {
             id: this.getNewId(),
             name: name,
-            reps: reps
+            reps: reps,
+            rest: rest
         };
         exercises.push(exercise);
         localStorage.setItem('exercises', JSON.stringify(exercises));
