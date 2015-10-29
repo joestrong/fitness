@@ -11053,3 +11053,10 @@ fieldset[disabled] .mdl-textfield .mdl-textfield__label,
 
 .deleteExercise {
   cursor: pointer; }
+
+#add-exercise-dialog label, #add-exercise-dialog input {
+  display: block;
+  width: 100%; }
+
+#add-exercise-dialog input {
+  margin-bottom: 5px; }

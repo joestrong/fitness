@@ -33,6 +33,7 @@ export default class ExercisesController extends ViewController {
     showAddExerciseDialog()
     {
         this.dialog.MaterialDialog.show();
+        this.addExerciseName.focus();
     }
 
     /**
