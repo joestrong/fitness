@@ -98,6 +98,7 @@ export default class ExercisesController extends ViewController {
      */
     populateExerciseList()
     {
+        this.clearExercisesFromDom();
         var exercises = Exercise.get();
         for(let exercise of exercises) {
             this.addExerciseToDom(exercise);
@@ -113,5 +114,13 @@ export default class ExercisesController extends ViewController {
         this.listEl.removeChild(rowToRemove);
         var idToRemove = rowToRemove.getAttribute('data-id');
         Exercise.delete(idToRemove);
+    }
+
+    /**
+     * Clears the exercise list
+     */
+    clearExercisesFromDom()
+    {
+        this.listEl.innerHTML = '';
     }
 }
