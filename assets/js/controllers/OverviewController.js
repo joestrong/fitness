@@ -38,7 +38,7 @@ export default class OverviewController extends ViewController {
         this.clearExercisesFromDom();
         var exercises = Exercise.query(function(exercise) {
             var restTime = exercise.rest * 24 * 60 * 60 * 1000;
-            return exercise.lastComplete < Date.now() - restTime;
+            return (exercise.lastComplete < Date.now() - restTime) || typeof exercise.lastComplete === 'undefined';
         });
         for(let exercise of exercises) {
             this.addExerciseToDom(exercise);
