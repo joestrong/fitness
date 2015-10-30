@@ -33,7 +33,7 @@ export default class Exercise {
         var exercises = this.get();
         var lastId = exercises.reduce(function(last, exercise) {
             return Math.max(last, exercise.id);
-        }, 1);
+        }, 0);
         return lastId + 1;
     }
 
