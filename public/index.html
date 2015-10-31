@@ -93,12 +93,20 @@
             <h4>New exercise</h4>
         </div>
         <div class="mdl-dialog__content">
-            <label for="add-exercise-name">Name</label>
-            <input type="text" id="add-exercise-name" />
-            <label for="add-exercise-reps">Reps</label>
-            <input type="text" id="add-exercise-reps" value="3" />
-            <label for="add-exercise-rest">Rest Period (days)</label>
-            <input type="text" id="add-exercise-rest" value="2" />
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="add-exercise-name" />
+                <label class="mdl-textfield__label" for="add-exercise-name">Name</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="add-exercise-reps" />
+                <label class="mdl-textfield__label" for="add-exercise-reps">Reps</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="add-exercise-rest" />
+                <label class="mdl-textfield__label" for="add-exercise-rest">Rest</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+            </div>
         </div>
         <div class="mdl-dialog__actions">
             <button type="button" class="mdl-button mdl-button--primary">Add</button>
