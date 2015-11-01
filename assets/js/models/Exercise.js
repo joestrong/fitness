@@ -11,8 +11,8 @@ export default class Exercise {
         var exercise = {
             id: this.getNewId(),
             name: name,
-            reps: reps,
-            rest: rest
+            reps: parseInt(reps),
+            rest: parseInt(rest)
         };
         exercises.push(exercise);
         localStorage.setItem('exercises', JSON.stringify(exercises));
