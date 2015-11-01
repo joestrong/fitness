@@ -11053,3 +11053,11 @@ fieldset[disabled] .mdl-textfield .mdl-textfield__label,
 
 .deleteExercise {
   cursor: pointer; }
+
+.version {
+  color: #757575;
+  padding: 16px;
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0; }
