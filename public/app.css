@@ -11061,3 +11061,7 @@ fieldset[disabled] .mdl-textfield .mdl-textfield__label,
   position: absolute;
   left: 0;
   bottom: 0; }
+
+@media (min-height: 475px) {
+  .mdl-dialog {
+    top: 15%; } }
