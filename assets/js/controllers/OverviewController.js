@@ -1,5 +1,6 @@
 import ViewController from "./ViewController.js";
 import Exercise from "../models/Exercise.js";
+import ExerciseLog from "../models/ExerciseLog.js";
 
 export default class OverviewController extends ViewController {
 
@@ -23,10 +24,12 @@ export default class OverviewController extends ViewController {
     completeExercise(element)
     {
         var rowElement = element.parentNode.parentNode;
-        var completeId = rowElement.getAttribute('data-id');
-        Exercise.update(completeId, {
-            lastComplete: Date.now()
+        var exerciseId = rowElement.getAttribute('data-id');
+        var completionDate = Date.now();
+        Exercise.update(exerciseId, {
+            lastComplete: completionDate
         });
+        ExerciseLog.add(exerciseId, completionDate);
         this.populateExerciseList();
     }
 
