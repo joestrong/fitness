@@ -7,38 +7,58 @@ export default class Exercise {
      */
     static add(name, reps, rest)
     {
-        var exercises = this.get();
+        var store = this.getStore();
         var exercise = {
-            id: this.getNewId(),
+            id: store.incrementId,
             name: name,
             reps: parseInt(reps),
             rest: parseInt(rest)
         };
-        exercises.push(exercise);
-        localStorage.setItem('exercises', JSON.stringify(exercises));
+        store.items.push(exercise);
+        store.incrementId++;
+        this.setStore(store);
         return exercise;
     }
 
     /**
      * Returns all the stored exercises
-     * @returns {Array}
+     * @returns {{}}
      */
     static get()
     {
-        return JSON.parse(localStorage.getItem('exercises')) || [];
+        var store = this.getStore();
+        return store.items;
     }
 
     /**
-     * Get the next id to use when adding a record
-     * @returns {*}
+     * Returns the store
+     * @returns {{}}
      */
-    static getNewId()
+    static getStore()
     {
-        var exercises = this.get();
-        var lastId = exercises.reduce(function(last, exercise) {
-            return Math.max(last, exercise.id);
-        }, 0);
-        return lastId + 1;
+        var store = JSON.parse(localStorage.getItem('exercises')) || { incrementId: 1, items: [] };
+        if (!store.items) {
+            return this.upgradeLegacy(store);
+        }
+        return store;
+    }
+
+    /**
+     * Converts old-style store to new style
+     * @param legacyStore
+     * @returns {{}}
+     */
+    static upgradeLegacy(legacyStore)
+    {
+        var store = {};
+        store.items = legacyStore;
+        store.incrementId = (function() {
+            var lastId = legacyStore.reduce(function (last, exercise) {
+                return Math.max(last, exercise.id);
+            }, 0);
+            return lastId + 1;
+        })();
+        return store;
     }
 
     /**
@@ -47,11 +67,11 @@ export default class Exercise {
      */
     static delete(id)
     {
-        var exercises = this.get();
-        exercises = exercises.filter(function(exercise) {
+        var store = this.getStore();
+        store.items = store.items.filter(function(exercise) {
             return exercise.id != id;
         });
-        localStorage.setItem('exercises', JSON.stringify(exercises));
+        this.setStore(store);
     }
 
     /**
@@ -61,8 +81,8 @@ export default class Exercise {
      */
     static update(id, changeData)
     {
-        var exercises = this.get();
-        exercises = exercises.map(function(exercise) {
+        var store = this.getStore();
+        store.items = store.items.map(function(exercise) {
             if (exercise.id == id) {
                 for (let attribute in changeData) {
                     if (changeData.hasOwnProperty(attribute)) {
@@ -72,7 +92,7 @@ export default class Exercise {
             }
             return exercise;
         });
-        localStorage.setItem('exercises', JSON.stringify(exercises));
+        this.setStore(store);
     }
 
     /**
@@ -83,15 +103,15 @@ export default class Exercise {
      */
     static where(property, operator, value)
     {
-        var exercises = this.get();
-        exercises = exercises.filter(function(exercise) {
+        var store = this.getStore();
+        store.items = store.items.filter(function(exercise) {
             var field = exercise[property];
             var greaterThan = operator == '>' && field > value;
             var lessThan = operator == '<' && field < value;
             var equalTo = operator == '=' && field == value;
             return (greaterThan || lessThan || equalTo);
         });
-        return exercises;
+        return store.items;
     }
 
     /**
@@ -100,8 +120,16 @@ export default class Exercise {
      */
     static query(queryMethod)
     {
-        var exercises = this.get();
-        exercises = exercises.filter(queryMethod);
-        return exercises;
+        var store = this.getStore();
+        store.items = store.items.filter(queryMethod);
+        return store.items;
+    }
+
+    /**
+     * Sets the store
+     */
+    static setStore(store)
+    {
+        localStorage.setItem('exercises', JSON.stringify(store));
     }
 }

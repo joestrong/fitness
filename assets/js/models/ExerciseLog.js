@@ -7,37 +7,57 @@ export default class ExerciseLog {
      */
     static add(exerciseId, dateCompleted)
     {
-        var exerciseLogs = this.get();
+        var store = this.getStore();
         var exerciseLog = {
-            id: this.getNewId(),
+            id: store.incrementId,
             exerciseId: exerciseId,
             dateCompleted: dateCompleted
         };
-        exerciseLogs.push(exerciseLog);
-        localStorage.setItem('exerciseLogs', JSON.stringify(exerciseLogs));
+        store.items.push(exerciseLog);
+        store.incrementId++;
+        this.setStore(store);
         return exerciseLog;
     }
 
     /**
      * Returns all the stored exercise logs
-     * @returns {Array}
+     * @returns {{}}
      */
     static get()
     {
-        return JSON.parse(localStorage.getItem('exerciseLogs')) || [];
+        var store = this.getStore();
+        return store.items;
     }
 
     /**
-     * Get the next id to use when adding a record
-     * @returns {*}
+     * Returns the store
+     * @returns {{}}
      */
-    static getNewId()
+    static getStore()
     {
-        var exerciseLogs = this.get();
-        var lastId = exerciseLogs.reduce(function(last, exerciseLog) {
-            return Math.max(last, exerciseLog.id);
-        }, 0);
-        return lastId + 1;
+        var store = JSON.parse(localStorage.getItem('exerciseLogs')) || { incrementId: 1, items: [] };
+        if (!store.items) {
+            return this.upgradeLegacy(store);
+        }
+        return store;
+    }
+
+    /**
+     * Converts old-style store to new style
+     * @param legacyStore
+     * @returns {{}}
+     */
+    static upgradeLegacy(legacyStore)
+    {
+        var store = {};
+        store.items = legacyStore;
+        store.incrementId = (function() {
+            var lastId = legacyStore.reduce(function (last, exercise) {
+                return Math.max(last, exercise.id);
+            }, 0);
+            return lastId + 1;
+        })();
+        return store;
     }
 
     /**
@@ -48,15 +68,15 @@ export default class ExerciseLog {
      */
     static where(property, operator, value)
     {
-        var exerciseLogs = this.get();
-        exerciseLogs = exerciseLogs.filter(function(exerciseLog) {
+        var store = this.getStore();
+        store.items = store.items.filter(function(exerciseLog) {
             var field = exerciseLog[property];
             var greaterThan = operator == '>' && field > value;
             var lessThan = operator == '<' && field < value;
             var equalTo = operator == '=' && field == value;
             return (greaterThan || lessThan || equalTo);
         });
-        return exerciseLogs;
+        return store.items;
     }
 
     /**
@@ -65,8 +85,16 @@ export default class ExerciseLog {
      */
     static query(queryMethod)
     {
-        var exerciseLogs = this.get();
-        exerciseLogs = exerciseLogs.filter(queryMethod);
-        return exerciseLogs;
+        var store = this.getStore();
+        store.items = store.items.filter(queryMethod);
+        return store.items;
+    }
+
+    /**
+     * Sets the store
+     */
+    static setStore(store)
+    {
+        localStorage.setItem('exerciseLogs', JSON.stringify(store));
     }
 }
