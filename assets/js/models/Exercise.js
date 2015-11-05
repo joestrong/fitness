@@ -1,4 +1,15 @@
-export default class Exercise {
+import Model from './Model.js';
+
+export default class Exercise extends Model{
+
+    /**
+     * Returns the localstorage key to use
+     * @returns {string}
+     */
+    static getKey()
+    {
+        return 'exercises';
+    }
 
     /**
      * Stores a new exercise
@@ -28,19 +39,6 @@ export default class Exercise {
     {
         var store = this.getStore();
         return store.items;
-    }
-
-    /**
-     * Returns the store
-     * @returns {{}}
-     */
-    static getStore()
-    {
-        var store = JSON.parse(localStorage.getItem('exercises')) || { incrementId: 1, items: [] };
-        if (!store.items) {
-            return this.upgradeLegacy(store);
-        }
-        return store;
     }
 
     /**
@@ -123,13 +121,5 @@ export default class Exercise {
         var store = this.getStore();
         store.items = store.items.filter(queryMethod);
         return store.items;
-    }
-
-    /**
-     * Sets the store
-     */
-    static setStore(store)
-    {
-        localStorage.setItem('exercises', JSON.stringify(store));
     }
 }
