@@ -4,6 +4,6 @@ export default class ScheduleController extends ViewController {
 
     constructor()
     {
-        super(document.querySelector('#schedule'));
+        super(document.querySelector('#schedule'), 'Schedule');
     }
 }

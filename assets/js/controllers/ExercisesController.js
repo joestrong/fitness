@@ -5,7 +5,7 @@ export default class ExercisesController extends ViewController {
 
     constructor()
     {
-        super(document.querySelector('#exercises'));
+        super(document.querySelector('#exercises'), 'Exercises');
 
         this.listEl = this.container.querySelector('.exercise-table tbody');
         this.listEl.addEventListener('click', (event) => {

@@ -6,7 +6,7 @@ export default class OverviewController extends ViewController {
 
     constructor()
     {
-        super(document.querySelector('#overview'));
+        super(document.querySelector('#overview'), 'Overview');
 
         this.listEl = this.container.querySelector('.exercise-table tbody');
         this.listEl.addEventListener('click', (event) => {
