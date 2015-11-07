@@ -1,6 +1,6 @@
 {
   "name": "fitness",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,7 @@
   "author": "Joe Strong <joestrong@gmail.com> (https://www.joestrong.co.uk/)",
   "license": "MIT",
   "dependencies": {
+    "dateformat": "^1.0.11",
     "material-design-lite": "git+https://github.com/google/material-design-lite.git#997bb8e92ff7a7b1a9ee23985a80dbeafdaa13a3"
   },
   "devDependencies": {

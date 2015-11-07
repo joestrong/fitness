@@ -11045,6 +11045,9 @@ fieldset[disabled] .mdl-textfield .mdl-textfield__label,
 
 .exercise-table {
   width: 100%; }
+  .exercise-table .table-group {
+    background: #3f51b5;
+    color: #fff; }
 
 #add-exercise-button {
   position: fixed;
