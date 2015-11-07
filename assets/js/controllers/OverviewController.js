@@ -4,9 +4,11 @@ import ExerciseLog from "../models/ExerciseLog.js";
 
 export default class OverviewController extends ViewController {
 
-    constructor()
+    constructor(application)
     {
         super(document.querySelector('#overview'), 'Overview');
+
+        this.application = application;
 
         this.listEl = this.container.querySelector('.exercise-table tbody');
         this.listEl.addEventListener('click', (event) => {
@@ -44,8 +46,16 @@ export default class OverviewController extends ViewController {
             var restTime = (parseInt(exercise.rest) + 1) * 24 * 60 * 60 * 1000;
             return (dayCompleted < Date.now() - restTime) || typeof exercise.lastComplete === 'undefined';
         });
-        for(let exercise of exercises) {
-            this.addExerciseToDom(exercise);
+        if (exercises.length === 0) {
+            if (Exercise.get().length === 0) {
+                this.showNoExercisesText();
+            } else {
+                this.showNoExercisesForTodayText();
+            }
+        } else {
+            for (let exercise of exercises) {
+                this.addExerciseToDom(exercise);
+            }
         }
     }
 
@@ -84,5 +94,47 @@ export default class OverviewController extends ViewController {
     clearExercisesFromDom()
     {
         this.listEl.innerHTML = '';
+    }
+
+    /**
+     * Shows a message in exercise table when no exercises are to be done today
+     */
+    showNoExercisesForTodayText()
+    {
+        var row = document.createElement("tr");
+
+        var col = document.createElement("td");
+        col.innerHTML = "There are no exercises left to do today. <a href='#'>Check schedule</a>.";
+        col.className = "mdl-data-table__cell--non-numeric table-message";
+        col.setAttribute('colspan', 3);
+        col.addEventListener('click', event => {
+            if (event.target.nodeName === "A") {
+                this.application.switchToSchedule();
+            }
+        });
+
+        row.appendChild(col);
+        this.listEl.appendChild(row);
+    }
+
+    /**
+     * Shows a message in exercise table when no exercises are to be done today
+     */
+    showNoExercisesText()
+    {
+        var row = document.createElement("tr");
+
+        var col = document.createElement("td");
+        col.innerHTML = "You haven't added any exercises yet. <a href='#'>Manage exercises</a>";
+        col.className = "mdl-data-table__cell--non-numeric table-message";
+        col.setAttribute('colspan', 3);
+        col.addEventListener('click', event => {
+            if (event.target.nodeName === "A") {
+                this.application.switchToExercises();
+            }
+        });
+
+        row.appendChild(col);
+        this.listEl.appendChild(row);
     }
 }

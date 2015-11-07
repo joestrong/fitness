@@ -11048,6 +11048,8 @@ fieldset[disabled] .mdl-textfield .mdl-textfield__label,
   .exercise-table .table-group {
     background: #3f51b5;
     color: #fff; }
+  .exercise-table .table-message {
+    text-align: center; }
 
 #add-exercise-button {
   position: fixed;

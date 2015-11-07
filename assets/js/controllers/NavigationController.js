@@ -25,6 +25,7 @@ export default class NavigationController {
         a.addEventListener('click', (e) => {
             e.preventDefault();
             this.switchView(controller)
+            this.closeDrawer();
         });
         this.container.appendChild(a);
         if (setDefault) {
@@ -43,7 +44,6 @@ export default class NavigationController {
         }
         this.currentController = controller;
         this.currentController.show();
-        this.closeDrawer();
     }
 
     /**
