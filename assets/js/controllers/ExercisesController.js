@@ -10,18 +10,25 @@ export default class ExercisesController extends ViewController {
         this.listEl = this.container.querySelector('.exercise-table tbody');
         this.listEl.addEventListener('click', (event) => {
             if (event.target.classList.contains('deleteExercise')) {
-                this.deleteExercise(event.target);
+                this.rowToRemove = event.target.parentNode.parentNode;
+                this.exerciseIdToRemove = this.rowToRemove.getAttribute('data-id');
+                this.showDeleteExerciseDialog();
             }
         });
         this.populateExerciseList();
 
-        this.dialog = document.querySelector('#add-exercise-dialog');
-        this.addExerciseName = this.dialog.querySelector('#add-exercise-name');
-        this.addExerciseReps = this.dialog.querySelector('#add-exercise-reps');
-        this.addExerciseRest = this.dialog.querySelector('#add-exercise-rest');
-        this.dialogButtons = this.dialog.querySelector('.mdl-dialog__actions').querySelectorAll('.mdl-button');
-        this.dialogButtons[0].addEventListener('click', () => this.addExercise());
-        this.dialogButtons[1].addEventListener('click', () => this.closeAddExerciseDialog());
+        this.addDialog = document.querySelector('#add-exercise-dialog');
+        this.addExerciseName = this.addDialog.querySelector('#add-exercise-name');
+        this.addExerciseReps = this.addDialog.querySelector('#add-exercise-reps');
+        this.addExerciseRest = this.addDialog.querySelector('#add-exercise-rest');
+        this.addDialogButtons = this.addDialog.querySelector('.mdl-dialog__actions').querySelectorAll('.mdl-button');
+        this.addDialogButtons[0].addEventListener('click', () => this.addExercise());
+        this.addDialogButtons[1].addEventListener('click', () => this.closeAddExerciseDialog());
+
+        this.deleteDialog = document.querySelector('#delete-exercise-dialog');
+        this.deleteDialogButtons = this.deleteDialog.querySelector('.mdl-dialog__actions').querySelectorAll('.mdl-button');
+        this.deleteDialogButtons[0].addEventListener('click', () => this.deleteExercise());
+        this.deleteDialogButtons[1].addEventListener('click', () => this.closeDeleteExerciseDialog());
 
         this.addExerciseButton = document.querySelector('#add-exercise-button');
         this.addExerciseButton.addEventListener('click', () => this.showAddExerciseDialog())
@@ -32,7 +39,7 @@ export default class ExercisesController extends ViewController {
      */
     showAddExerciseDialog()
     {
-        this.dialog.MaterialDialog.show();
+        this.addDialog.MaterialDialog.show();
         this.addExerciseName.focus();
     }
 
@@ -41,7 +48,7 @@ export default class ExercisesController extends ViewController {
      */
     closeAddExerciseDialog()
     {
-        this.dialog.MaterialDialog.close();
+        this.addDialog.MaterialDialog.close();
     }
 
     /**
@@ -62,8 +69,7 @@ export default class ExercisesController extends ViewController {
 
     /**
      * Adds an exercise to the exercise list element in the dom
-     * @param name
-     * @param reps
+     * @param exercise
      */
     addExerciseToDom(exercise)
     {
@@ -106,14 +112,29 @@ export default class ExercisesController extends ViewController {
     }
 
     /**
+     * Shows the Delete Exercise dialog
+     */
+    showDeleteExerciseDialog()
+    {
+        this.deleteDialog.MaterialDialog.show();
+    }
+
+    /**
+     * Closes the Delete Exercise dialog
+     */
+    closeDeleteExerciseDialog()
+    {
+        this.deleteDialog.MaterialDialog.close();
+    }
+
+    /**
      * Delete exercise
      */
-    deleteExercise(element)
+    deleteExercise()
     {
-        var rowToRemove = element.parentNode.parentNode;
-        this.listEl.removeChild(rowToRemove);
-        var idToRemove = rowToRemove.getAttribute('data-id');
-        Exercise.delete(idToRemove);
+        this.listEl.removeChild(this.rowToRemove);
+        Exercise.delete(this.exerciseIdToRemove);
+        this.closeDeleteExerciseDialog();
     }
 
     /**
