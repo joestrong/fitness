@@ -27,7 +27,7 @@
             <span class="mdl-layout-title">Fitness</span>
             <nav id="navigation" class="mdl-navigation">
             </nav>
-            <span class="version">v0.0.9</span>
+            <span class="version">v0.0.10</span>
         </div>
         <main class="mdl-layout__content">
             <div class="mdl-grid">
@@ -85,18 +85,19 @@
         </div>
         <div class="mdl-dialog__content">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" id="add-exercise-name" />
+                <input class="mdl-textfield__input" type="text" id="add-exercise-name" required />
                 <label class="mdl-textfield__label" for="add-exercise-name">Name</label>
+                <span class="mdl-textfield__error">Name is required</span>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="add-exercise-reps" />
+                <input class="mdl-textfield__input" type="text" pattern="[0-9]+" id="add-exercise-reps" required />
                 <label class="mdl-textfield__label" for="add-exercise-reps">Reps</label>
-                <span class="mdl-textfield__error">Input is not a number!</span>
+                <span class="mdl-textfield__error">Reps must be a whole number</span>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="add-exercise-rest" />
+                <input class="mdl-textfield__input" type="text" pattern="[0-9]+" id="add-exercise-rest" required />
                 <label class="mdl-textfield__label" for="add-exercise-rest">Rest</label>
-                <span class="mdl-textfield__error">Input is not a number!</span>
+                <span class="mdl-textfield__error">Rest must be a whole number</span>
             </div>
         </div>
         <div class="mdl-dialog__actions">

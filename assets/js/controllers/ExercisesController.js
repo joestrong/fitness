@@ -56,15 +56,19 @@ export default class ExercisesController extends ViewController {
      */
     addExercise()
     {
-        var name = this.addExerciseName.value;
-        var reps = this.addExerciseReps.value;
-        var rest = this.addExerciseRest.value;
-        this.addExerciseName.value = "";
-        this.addExerciseReps.value = "";
-        this.addExerciseRest.value = "";
-        var exercise = Exercise.add(name, reps, rest);
-        this.addExerciseToDom(exercise);
-        this.closeAddExerciseDialog();
+        if (this.addExerciseName.checkValidity()
+            && this.addExerciseReps.checkValidity()
+            && this.addExerciseRest.checkValidity()) {
+            var name = this.addExerciseName.value;
+            var reps = this.addExerciseReps.value;
+            var rest = this.addExerciseRest.value;
+            this.addExerciseName.value = "";
+            this.addExerciseReps.value = "";
+            this.addExerciseRest.value = "";
+            var exercise = Exercise.add(name, reps, rest);
+            this.addExerciseToDom(exercise);
+            this.closeAddExerciseDialog();
+        }
     }
 
     /**
