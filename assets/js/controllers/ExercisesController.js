@@ -48,6 +48,9 @@ export default class ExercisesController extends ViewController {
      */
     closeAddExerciseDialog()
     {
+        this.addExerciseName.value = "";
+        this.addExerciseReps.value = "";
+        this.addExerciseRest.value = "";
         this.addDialog.MaterialDialog.close();
     }
 
