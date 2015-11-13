@@ -10,6 +10,7 @@ export default class ScheduleController extends ViewController {
 
         this.listEl = this.container.querySelector('.exercise-table tbody');
         this.populateScheduleList();
+        document.addEventListener('exerciseUpdate', this.populateScheduleList.bind(this));
     }
 
     populateScheduleList()

@@ -17,6 +17,7 @@ export default class OverviewController extends ViewController {
             }
         });
         this.populateExerciseList();
+        document.addEventListener('exerciseUpdate', this.populateExerciseList.bind(this));
     }
 
     /**
@@ -32,7 +33,6 @@ export default class OverviewController extends ViewController {
             lastComplete: completionDate
         });
         ExerciseLog.add(exerciseId, completionDate);
-        this.populateExerciseList();
     }
 
     /**

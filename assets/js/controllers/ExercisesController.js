@@ -3,9 +3,11 @@ import Exercise from "../models/Exercise.js";
 
 export default class ExercisesController extends ViewController {
 
-    constructor()
+    constructor(application)
     {
         super(document.querySelector('#exercises'), 'Exercises');
+
+        this.application = application;
 
         this.listEl = this.container.querySelector('.exercise-table tbody');
         this.listEl.addEventListener('click', (event) => {
@@ -16,6 +18,7 @@ export default class ExercisesController extends ViewController {
             }
         });
         this.populateExerciseList();
+        document.addEventListener('exerciseUpdate', this.populateExerciseList.bind(this));
 
         this.addDialog = document.querySelector('#add-exercise-dialog');
         this.addExerciseName = this.addDialog.querySelector('#add-exercise-name');
@@ -68,8 +71,7 @@ export default class ExercisesController extends ViewController {
             this.addExerciseName.value = "";
             this.addExerciseReps.value = "";
             this.addExerciseRest.value = "";
-            var exercise = Exercise.add(name, reps, rest);
-            this.addExerciseToDom(exercise);
+            Exercise.add(name, reps, rest);
             this.closeAddExerciseDialog();
         }
     }

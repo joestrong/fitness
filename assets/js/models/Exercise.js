@@ -122,4 +122,13 @@ export default class Exercise extends Model{
         store.items = store.items.filter(queryMethod);
         return store.items;
     }
+
+    /**
+     * Sets the store and triggers Exercise update event
+     */
+    static setStore(store)
+    {
+        super.setStore(store);
+        document.dispatchEvent(window.exerciseUpdateEvent);
+    }
 }
