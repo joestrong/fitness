@@ -1,0 +1,12 @@
+fitness:
+  container_name: fitness
+  build: ./docker/fitness
+  ports:
+   - "8084:80"
+  volumes_from:
+   - data
+data:
+  container_name: fitness-data
+  image: debian:jessie
+  volumes:
+   - /web

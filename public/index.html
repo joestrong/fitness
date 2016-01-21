@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" manifest="fitness.appcache">
+<head>
+    <meta charset="UTF-8">
+    <title>Fitness</title>
+    <link rel="stylesheet" href="/app.css">
+
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <meta name="apple-mobile-web-app-status-barstyle" content="#3f51b5">
+    <meta name="theme-color" content="#3f51b5">
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header mdl-layout__header--scroll">
+            <!-- Top row, always visible -->
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span id="viewTitle" class="mdl-layout-title"></span>
+                <div class="mdl-layout-spacer"></div>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Fitness</span>
+            <nav id="navigation" class="mdl-navigation">
+            </nav>
+            <span class="version">v0.0.12</span>
+        </div>
+        <main class="mdl-layout__content">
+            <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--12-col">
+                    <div id="overview">
+                        <table class="exercise-table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                            <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Exercise</th>
+                                <th>Reps</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="exercises">
+                        <table class="exercise-table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                            <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Exercise</th>
+                                <th>Reps</th>
+                                <th>Rest</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <button id="add-exercise-button" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                            <i class="material-icons">add</i>
+                        </button>
+                    </div>
+                    <div id="schedule">
+                        <table class="exercise-table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                            <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Exercise</th>
+                                <th>Reps</th>
+                                <th>Rest</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="add-exercise-dialog" class="mdl-dialog mdl-js-dialog">
+        <div class="mdl-dialog__title">
+            <h4>New exercise</h4>
+        </div>
+        <div class="mdl-dialog__content">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="add-exercise-name" required />
+                <label class="mdl-textfield__label" for="add-exercise-name">Name</label>
+                <span class="mdl-textfield__error">Name is required</span>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="[0-9]+" id="add-exercise-reps" required />
+                <label class="mdl-textfield__label" for="add-exercise-reps">Reps</label>
+                <span class="mdl-textfield__error">Reps must be a whole number</span>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="[0-9]+" id="add-exercise-rest" required />
+                <label class="mdl-textfield__label" for="add-exercise-rest">Rest</label>
+                <span class="mdl-textfield__error">Rest must be a whole number</span>
+            </div>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button mdl-button--primary">Add</button>
+            <button type="button" class="mdl-button">Cancel</button>
+        </div>
+    </div>
+    <div id="delete-exercise-dialog" class="mdl-dialog mdl-js-dialog">
+        <div class="mdl-dialog__title">
+            <h4>Delete exercise</h4>
+        </div>
+        <div class="mdl-dialog__content">
+            <p>Please confirm that you want to delete this exercise</p>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button mdl-button--primary">Delete</button>
+            <button type="button" class="mdl-button">Cancel</button>
+        </div>
+    </div>
+    <script src="/app.js"></script>
+</body>
+</html>
