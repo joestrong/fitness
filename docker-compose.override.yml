@@ -1,0 +1,3 @@
+fitness:
+  ports:
+   - "80:80"
