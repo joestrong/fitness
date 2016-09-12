@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "dateformat": "^1.0.11",
-    "material-design-lite": "git+https://github.com/google/material-design-lite.git#997bb8e92ff7a7b1a9ee23985a80dbeafdaa13a3"
+    "material-design-lite": "1.2.*"
   },
   "devDependencies": {
     "babelify": "^6.4.0",

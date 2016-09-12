@@ -1,5 +1,4 @@
 var gulp = require("gulp");
-var rename = require("gulp-rename");
 var browserify = require("browserify");
 var babelify = require("babelify");
 var source = require("vinyl-source-stream");
@@ -14,16 +13,10 @@ gulp.task("scripts", function() {
         .pipe(gulp.dest('./public/'));
 });
 
-gulp.task("styles", ['sasslibs'], function() {
+gulp.task("styles", function() {
     gulp.src('./assets/sass/app.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./public/'));
-});
-
-gulp.task("sasslibs", function() {
-    gulp.src('./node_modules/material-design-lite/dist/material.css')
-        .pipe(rename('_material.scss'))
-        .pipe(gulp.dest('./assets/sass/'));
 });
 
 gulp.task("default", ['scripts', 'styles']);
